@@ -1,9 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
+import morgan from 'morgan';
 
-import products from './data/products.js';
 import conntetDB from './config/db.js';
+import productRoutes from './routes/productRoutes.js';
+import { errorHandelar, notFound } from './middleware/errorMiddleware.js';
 
 dotenv.config();
 conntetDB();
@@ -11,15 +13,13 @@ conntetDB();
 const app = express();
 
 app.use(express.json());
+app.use(morgan('dev'));
 
-app.get('/api/products', (req, res, next) => {
-  res.json(products);
-});
+app.use('/api/products', productRoutes);
 
-app.get('/api/products/:id', (req, res, next) => {
-  const product = products.find((p) => p._id === req.params.id);
-  res.json(product);
-});
+// error handling
+app.use(notFound);
+app.use(errorHandelar);
 
 const PORT = process.env.PORT || 5000;
 
