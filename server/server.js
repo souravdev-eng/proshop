@@ -5,6 +5,8 @@ import morgan from 'morgan';
 
 import conntetDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+
 import { errorHandelar, notFound } from './middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -16,6 +18,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 app.use('/api/products', productRoutes);
+app.use('/api/user', userRoutes);
 
 // error handling
 app.use(notFound);
