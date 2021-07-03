@@ -7,18 +7,20 @@ import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
+import LoginScreen from './screens/LoginScreen';
 
 const App = () => {
   return (
     <Router>
       <Header />
-      <Container>
-        <main className='py-3'>
+      <main className='py-3'>
+        <Container>
           <Route path='/' exact component={HomeScreen} />
+          <Route path='/login' exact component={LoginScreen} />
           <Route path='/products/:id' exact component={ProductScreen} />
           <Route path='/cart/:id?' exact component={CartScreen} />
-        </main>
-      </Container>
+        </Container>
+      </main>
       <Footer />
     </Router>
   );
